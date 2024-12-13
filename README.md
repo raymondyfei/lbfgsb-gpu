@@ -6,13 +6,13 @@ cuLBFGSB is an open-source library for the GPU-implementation (with NVIDIA CUDA)
 
 It has been recently tested with CUDA 12.0.
 
-This library contains both the L-BFGS-B implementation on the GPU (with CUDA) and the original implementation on the CPU. It also includes a simple example code that solves the steady-state combustion problem (dsscfg) in MINPACK-2 (https://en.wikipedia.org/wiki/MINPACK) test to both the CPU and the CUDA version of L-BFGS-B.
+This library contains both the L-BFGS-B implementation on the GPU (with CUDA) and the original implementation on the CPU. It also includes a simple example code that solves the steady-state combustion problem (dsscfg) in [MINPACK-2](https://en.wikipedia.org/wiki/MINPACK) test to both the CPU and the CUDA version of L-BFGS-B.
 
 We would like to hear from you if you appreciate this work.
 
-It is an updated implementation of the paper Parallel L-BFGS-B algorithm on GPU ( refer to our project page for more details: https://raymondyfei.github.io/lbfgsb/lbfgsb_tech_report.pdf ). For the original version that contains a solver to the CVD problem, please refer to https://raymondyfei.github.io/lbfgsb_gpu.zip .
+It is an updated implementation of the paper Parallel L-BFGS-B algorithm on GPU (refer to our [paper](https://raymondyfei.github.io/lbfgsb/lbfgsb_tech_report.pdf) for more details). We also have [an original version that contains a solver to the CVD problem](https://raymondyfei.github.io/lbfgsb_gpu.zip).
 
-Additionally, we provide a pre-compiled library for Windows x64 platform using CUDA 11.2. You may download the compiled library from: https://raymondyfei.github.io/lbfgsb/culbfgsb_compiled_CUDA_11_2_win64.zip , which contains both the DLL and the static library.
+Additionally, we provide [a pre-compiled library for Windows x64 platform using CUDA 11.2](https://raymondyfei.github.io/lbfgsb/culbfgsb_compiled_CUDA_11_2_win64.zip), which contains both the DLL and the static library.
 
 Remark: the current version supports a fixed size of Hessian approximation `m == 8`, which has been sufficient for most applications.
 
@@ -24,7 +24,7 @@ In the figure above, we summarize the acceleration rate on the steady-state comb
 
 **Compilation**
 -----------------
-To compile cuLBFGSB, you'll need CMake or CMake-GUI (https://cmake.org), and the CUDA toolkit (https://developer.nvidia.com/cuda-downloads) installed before compilation.
+To compile cuLBFGSB, you'll need [CMake or CMake-GUI](https://cmake.org), and the [CUDA toolkit](https://developer.nvidia.com/cuda-downloads) installed before compilation.
 
 Command Line:
 1. make a directory, say, *build*, with *mkdir build*, enter the *build* directory, type *cmake ..*
