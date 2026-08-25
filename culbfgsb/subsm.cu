@@ -483,9 +483,6 @@ __global__ void kernel30(const int nsub, const int* ind, real* d,
   sdatai[tid] = i;
   __syncthreads();
 
-  t[i] = mySum;
-  ti[i] = i;
-
   if (bx > 512) {
     if (tid < 512) {
       minex<real>(sdata[tid], sdata[tid + 512], sdatai[tid], sdatai[tid + 512]);

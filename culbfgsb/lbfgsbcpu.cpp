@@ -1992,7 +1992,7 @@ void lbfgsbdtrsl(ap::template_2d_array<real, true>& t, const int& n,
       ap::template_1d_array<real, true>&, ap::integer_1d_array&, bool&, bool&, \
       bool&);                                                                  \
   template void lbfgsbbmv<real>(                                               \
-      const int&, const ap::template_1d_array<real, true>&,                    \
+      const int&, const ap::template_2d_array<real, true>&,                    \
       ap::template_2d_array<real, true>&, const int&,                          \
       const ap::template_1d_array<real, true>&,                                \
       ap::template_1d_array<real, true>&, int&,                                \

@@ -588,7 +588,7 @@ __global__ void kernel5(int col, int iPitch_wn, real* wn) {
   volatile __shared__ real sdata[64];
 
   real mySum = 0;
-  if (blockIdx.y < col && blockIdx.x < col && js >= iis) {
+  if (blockIdx.y < col && blockIdx.x < col && js >= iis && i < col) {
     mySum = wn[i * iPitch_wn + iis] * wn[i * iPitch_wn + js];
   }
 

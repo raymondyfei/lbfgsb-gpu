@@ -1,0 +1,45 @@
+# Find Eigen3 via pkg-config (most reliable cross-platform method)
+find_package(PkgConfig QUIET)
+pkg_check_modules(EIGEN3 eigen3)
+
+# Find Google Test
+find_package(GTest QUIET)
+if(NOT GTest_FOUND)
+  find_package(GTest COMPONENTS GTest QUIET)
+endif()
+
+# Create a static library from Lbfgs.cpp
+add_library(lbfgs_lib STATIC Lbfgs.cpp)
+if(EIGEN3_FOUND)
+  target_include_directories(lbfgs_lib PRIVATE ${EIGEN3_INCLUDE_DIRS})
+endif()
+# cuLBFGSB includes cublas_v2.h, so we need CUDA include path for files that include culbfgsb.h
+find_path(CUDA_INCLUDE_DIRS NAMES cublas_v2.h PATHS /usr/local/cuda/include)
+if(CUDA_INCLUDE_DIRS)
+  target_include_directories(lbfgs_lib PRIVATE ${CUDA_INCLUDE_DIRS})
+endif()
+
+# Create LbfgsTest executable from LbfgsTest.cpp
+add_executable(LbfgsTest LbfgsTest.cpp)
+target_link_libraries(LbfgsTest lbfgs_lib cuLBFGSB)
+if(EIGEN3_FOUND)
+  target_include_directories(LbfgsTest PRIVATE ${EIGEN3_INCLUDE_DIRS})
+endif()
+if(GTest_FOUND)
+  target_link_libraries(LbfgsTest gtest)
+elseif(GTest_FOUND_GTest)
+  target_link_libraries(LbfgsTest gtest)
+endif()
+
+# Create CuLbfgsTest executable from CudaLbfgsTest.cu (CUDA file)
+add_executable(CuLbfgsTest CudaLbfgsTest.cu)
+set_target_properties(CuLbfgsTest PROPERTIES LANGUAGE CUDA)
+target_link_libraries(CuLbfgsTest lbfgs_lib cuLBFGSB)
+if(EIGEN3_FOUND)
+  target_include_directories(CuLbfgsTest PRIVATE ${EIGEN3_INCLUDE_DIRS})
+endif()
+if(GTest_FOUND)
+  target_link_libraries(CuLbfgsTest gtest)
+elseif(GTest_FOUND_GTest)
+  target_link_libraries(CuLbfgsTest gtest)
+endif()

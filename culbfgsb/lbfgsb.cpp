@@ -65,15 +65,18 @@ LBFGSB_CUDA_FUNCTION void lbfgsbdefaultoption<float>(
   option.step_scaling = 1.0f;
 }
 
-#define INST_HELPER(real)                                              \
+#define INST_HELPER_MINIMIZE(real)                                     \
   template LBFGSB_CUDA_FUNCTION void lbfgsbminimize<real>(             \
       const int&, const LBFGSB_CUDA_STATE<real>&,                      \
       const LBFGSB_CUDA_OPTION<real>&, real*, const int*, const real*, \
-      const real*, LBFGSB_CUDA_SUMMARY<real>&);                        \
-  template LBFGSB_CUDA_FUNCTION void lbfgsbdefaultoption<real>(        \
-      LBFGSB_CUDA_OPTION<real> & option);
+      const real*, LBFGSB_CUDA_SUMMARY<real>&);
 
-INST_HELPER(double);
-INST_HELPER(float);
+INST_HELPER_MINIMIZE(double);
+INST_HELPER_MINIMIZE(float);
+
+// lbfgsbdefaultoption<float> already has an explicit specialization above,
+// so only <double> needs an explicit instantiation here.
+template LBFGSB_CUDA_FUNCTION void lbfgsbdefaultoption<double>(
+    LBFGSB_CUDA_OPTION<double>& option);
 
 }  // namespace lbfgsbcuda
